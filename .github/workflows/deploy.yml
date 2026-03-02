@@ -1,0 +1,24 @@
+name: Deploy Project
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    container:
+      image: node:20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
